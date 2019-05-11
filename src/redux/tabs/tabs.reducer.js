@@ -24,7 +24,6 @@ export default function(state = initialState, action) {
     case tabsActions.MOUNT_TAB:
       return produce(state, draft => {
         draft.activeTabIndex = action.activeIndex;
-        // jo tu cia?
       });
 
     case tabsActions.EDIT_DETAILS:

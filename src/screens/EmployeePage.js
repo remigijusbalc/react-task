@@ -26,6 +26,7 @@ class EmployeePage extends React.Component {
       );
     }
   };
+
   render() {
     const { employee } = this.props;
     console.log("renred");
@@ -45,8 +46,8 @@ class EmployeePage extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    activeTabIndex: state.tabs.activeTabIndex,
-    current: state.tabs.tabs[state.tabs.activeTabIndex]
+    activeTabIndex: getActiveTabIndex(state),
+    current: getActiveTab(state)
   };
 };
 
