@@ -9,4 +9,6 @@ const rootReducer = combineReducers({
   tabs: tabsReducer
 });
 
+export type RootState = ReturnType<typeof rootReducer> & {};
+
 export default createStore(rootReducer, composeWithDevTools());

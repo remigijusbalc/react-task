@@ -1,16 +1,22 @@
 import * as tabsActions from "./tabs.actions";
 import produce from "immer";
+import { Employee } from "../employees/employees.types";
 
-const initialState = {
+export interface TabsState {
+  tabs: Employee[];
+  activeTabIndex: number;
+}
+
+const initialState: TabsState = {
   tabs: [],
   activeTabIndex: 0
 };
 
-export default function(state = initialState, action) {
+export default function(state = initialState, action: any): TabsState {
   switch (action.type) {
     case tabsActions.PUSH_TAB:
       return produce(state, draft => {
-        draft.tabs.push(action.tab);
+        draft.tabs.push({ ...action.tab });
         draft.activeTabIndex = draft.tabs.length - 1;
       });
 
@@ -29,10 +35,10 @@ export default function(state = initialState, action) {
     case tabsActions.EDIT_DETAILS:
       return produce(state, draft => {
         const { tabIndex, property, input } = action;
-        draft.tabs = state.tabs.slice(0);
-        draft.tabs[tabIndex][property] = input;
+        const tab = draft.tabs[tabIndex];
+        const key = property as keyof Employee;
+        tab[key] = input;
       });
-
     default:
       return state;
   }
